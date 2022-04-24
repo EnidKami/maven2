@@ -39,11 +39,18 @@ public class StudentApi {
     {
         return studentList.stream().filter(student -> student.getId()==id).findFirst().get().getName();
     }
-    @GetMapping("/delete/{id}")
+    @DeleteMapping ("/delete/{id}")
     public boolean deleteStudentById(@PathVariable int id)
     {
         Student user = studentList.stream().filter(student -> student.getId() == id).findFirst().get();
                 return studentList.remove(user);
     }
 
+    @DeleteMapping ("/deletename/{name}")
+    public boolean deleteStudentByName(@PathVariable String name)
+    {
+        Student st = studentList.stream().filter(student -> student.getName().equals(name)).findFirst().get();
+        return studentList.remove(st);
+
+    }
 }
